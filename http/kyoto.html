@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>京都记事 | 漫行世界</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== SCRAPBOOK JOURNAL EXCLUSIVE THEME ===== */
+    :root {
+      --sb-bg: #fcfaf2; /* Warm paper white */
+      --sb-text: #2d2926; /* Deep charcoal */
+      --sb-accent: #b44c43; /* Japanese maple crimson */
+      --sb-accent-light: #e5b9b5;
+      --sb-border: #d4cfb9;
+      --sb-tape: rgba(229, 185, 181, 0.5);
+    }
+
+    body.scrapbook {
+      background-color: var(--sb-bg);
+      color: var(--sb-text);
+      font-family: 'Noto Sans SC', serif;
+      background-image: 
+        linear-gradient(rgba(212, 207, 185, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 207, 185, 0.15) 1px, transparent 1px);
+      background-size: 20px 20px; /* Graph paper texture */
+      line-height: 2;
+    }
+
+    /* Floating Back Button */
+    .back-btn {
+      position: fixed; top: 2rem; left: 2rem; z-index: 100;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(252, 250, 242, 0.9);
+      border: 1px solid var(--sb-border);
+      border-radius: 30px;
+      color: var(--sb-text);
+      text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: var(--sb-accent);
+      color: #fff;
+      border-color: var(--sb-accent);
+      transform: translateX(-5px);
+    }
+
+    /* Scrapbook Header */
+    .sb-hero {
+      height: 60vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      border-bottom: 2px dashed var(--sb-border);
+    }
+    .sb-hero img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      filter: sepia(10%) brightness(95%);
+    }
+    .sb-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(252,250,242,0.1) 60%, var(--sb-bg));
+    }
+    .sb-hero-content {
+      position: relative; z-index: 2; text-align: center;
+      background: rgba(252, 250, 242, 0.9);
+      padding: 2.5rem 4rem;
+      border: 1px solid var(--sb-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      max-width: 90%;
+    }
+    .sb-hero-content h1 {
+      font-size: 2.8rem; color: var(--sb-accent);
+      margin-bottom: 0.5rem; font-weight: 700;
+    }
+    .sb-hero-subtitle {
+      font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px;
+      color: #7a756b;
+    }
+
+    /* Main Content Container */
+    .sb-container {
+      max-width: 900px; margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Hand-drawn Washi Tape Effect */
+    .washi-tape {
+      width: 120px; height: 35px;
+      background: var(--sb-tape);
+      margin: 0 auto -15px;
+      transform: rotate(-3deg);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      border-left: 2px dashed rgba(255,255,255,0.4);
+      border-right: 2px dashed rgba(255,255,255,0.4);
+    }
+
+    /* Polaroid Image Gallery */
+    .polaroid-gallery {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; margin: 4rem 0;
+    }
+    .polaroid {
+      background: #fff;
+      padding: 1.2rem 1.2rem 3rem;
+      border: 1px solid #e2ded0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      border-radius: 2px;
+      transition: transform 0.4s ease;
+    }
+    .polaroid img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      filter: contrast(95%) sepia(5%);
+      margin-bottom: 1rem;
+    }
+    .polaroid-caption {
+      font-family: 'Playfair Display', serif;
+      text-align: center; font-size: 1rem;
+      font-style: italic; color: #5a5449;
+    }
+    .polaroid.left { transform: rotate(-3deg); }
+    .polaroid.right { transform: rotate(3deg); }
+    .polaroid:hover {
+      transform: scale(1.03) rotate(0deg);
+      z-index: 10;
+    }
+
+    /* Video Player Area */
+    .video-journal {
+      background: #fff;
+      border: 1px solid var(--sb-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 4rem 0;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    }
+    .video-label {
+      font-size: 0.9rem; color: var(--sb-accent);
+      margin-bottom: 1rem; font-weight: 600;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .video-container {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      background: #121215; border-radius: 6px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-placeholder {
+      color: #888; text-align: center;
+    }
+    .play-btn {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--sb-accent); color: white;
+      border: none; cursor: pointer; font-size: 1.5rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .play-btn:hover { transform: scale(1.1); }
+
+    /* Journal Paragraph Style */
+    .journal-entry {
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid var(--sb-border);
+      border-radius: 8px;
+      padding: 3rem;
+      margin: 3rem 0;
+      position: relative;
+    }
+    .journal-entry::before {
+      content: '🍂'; position: absolute; top: -1.5rem; right: 2rem;
+      font-size: 2.5rem;
+    }
+    .journal-title {
+      font-size: 1.8rem; color: var(--sb-accent);
+      margin-bottom: 2rem; font-weight: 700;
+      border-bottom: 1px dashed var(--sb-border);
+      padding-bottom: 0.8rem;
+    }
+    .journal-entry p {
+      font-size: 1.05rem; margin-bottom: 1.8rem;
+      text-indent: 2em; color: #433e38;
+    }
+    .journal-entry p::first-letter {
+      font-size: 1.5rem; color: var(--sb-accent);
+      font-weight: bold;
+    }
+
+    /* Page Footer */
+    .sb-footer {
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px dashed var(--sb-border);
+      color: #8c8577; font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body class="scrapbook">
+
+  <!-- Floating Back Button -->
+  <a href="./index.html" class="back-btn">← 返回主页</a>
+
+  <!-- Header Banner -->
+  <section class="sb-hero">
+    <img src="images/dest_kyoto.png" alt="京都秋色">
+    <div class="sb-hero-content">
+      <div class="washi-tape" style="top: -45px; left: -10px;"></div>
+      <h1>京都 · 枫叶手帐</h1>
+      <p class="sb-hero-subtitle">Kyoto Autumn Diary · 2024</p>
+    </div>
+  </section>
+
+  <!-- Content Container -->
+  <main class="sb-container">
+
+    <!-- Journal Section -->
+    <article class="journal-entry">
+      <h2 class="journal-title">清水晚秋，红叶如火</h2>
+      <p>
+        抵达京都的那天下午，天空正飘着温润的细雨。漫步在通往清水寺的古朴石板路上，街道两侧是木质低矮的町屋，空气里弥漫着淡淡的焙茶香气。这里的秋天，来得安静而深沉。
+      </p>
+      <p>
+        傍晚时分，雨渐渐停了，晚霞将西方的天空染成金橙。登上清水舞台，放眼望去，整座山谷已被密密匝匝的红叶彻底覆盖。冷冽的秋风吹过，落叶如雨般在半空中翻卷。那一刻的震撼，是相机无法完全收录的温柔。
+      </p>
+      <p>
+        夜幕降临，寺庙里的探照灯亮起，金色的光束刺破夜空，映照着如血的晚枫。古老的建筑与大自然的色彩交相辉映，仿佛时光在这里凝固了千年，叫人不忍大声呼吸，只求将这静谧永远铭刻于心。
+      </p>
+    </article>
+
+    <!-- Polaroid Gallery -->
+    <section>
+      <div class="washi-tape"></div>
+      <div class="polaroid-gallery">
+        <div class="polaroid left">
+          <img src="images/dest_kyoto.png" alt="古寺一隅">
+          <div class="polaroid-caption">秋染古刹 · 清水寺</div>
+        </div>
+        <div class="polaroid right">
+          <img src="images/dest_tokyo.png" alt="霓虹掠影">
+          <div class="polaroid-caption">旅途掠影 · 胶片风情</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Journal Placeholder -->
+    <section class="video-journal">
+      <div class="video-label">🎥 旅途影音 Vlog 记录</div>
+      <div class="video-container">
+        <div class="video-placeholder">
+          <button class="play-btn" onclick="alert('即将播放 Kyoto Travel Video...')">▶</button>
+          <p style="font-size:0.9rem; letter-spacing: 1px;">点击播放 4K 沉浸式旅行影像记录</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="sb-footer">
+    <p>© 2025 Wanderlens. 用手帐与快门，封存流淌的时光。</p>
+  </footer>
+
+</body>
+</html>

@@ -50,36 +50,36 @@
   </div>
   <div class="map-container fade-in">
     <div class="world-map" id="worldMap">
-      <!-- Interactive SVG World Map -->
+      <!-- Interactive SVG World Map with ISO-3 country IDs -->
       <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-        <!-- Simplified continents -->
-        <!-- North America -->
-        <path d="M150,80 L200,60 L250,70 L280,90 L290,120 L270,150 L250,180 L220,200 L200,220 L180,210 L160,190 L140,160 L130,130 L135,100 Z" />
-        <!-- South America -->
-        <path d="M220,250 L250,240 L270,260 L280,300 L275,340 L260,380 L240,400 L220,390 L210,360 L205,320 L210,280 Z" class="visited" data-tooltip="巴塔哥尼亚 · 阿根廷" />
-        <!-- Europe -->
-        <path d="M440,80 L470,70 L510,75 L530,90 L535,110 L520,130 L500,140 L480,150 L460,140 L445,120 L435,100 Z" class="visited" data-tooltip="圣托里尼 · 希腊" />
-        <!-- Africa -->
-        <path d="M450,170 L490,160 L520,180 L530,220 L525,270 L510,310 L490,340 L470,350 L450,330 L440,290 L435,250 L440,210 Z" class="visited" data-tooltip="马拉喀什 · 摩洛哥" />
-        <!-- Asia -->
-        <path d="M560,60 L620,50 L700,55 L760,70 L800,100 L810,140 L790,170 L750,190 L700,200 L650,190 L600,170 L570,150 L555,120 L550,90 Z" class="visited" data-tooltip="京都 · 日本 / 巴厘岛 · 印尼" />
-        <!-- Australia -->
-        <path d="M750,300 L800,290 L840,300 L860,330 L850,360 L830,380 L800,385 L770,370 L755,340 L745,320 Z" />
-        <!-- Iceland -->
-        <path d="M390,55 L410,50 L425,55 L420,65 L400,68 L390,62 Z" class="visited" data-tooltip="冰岛 · 极光之地" />
-        <!-- Scandinavia (Norway) -->
-        <path d="M470,45 L485,35 L500,40 L505,55 L495,65 L480,62 Z" class="visited" data-tooltip="挪威 · 峡湾" />
-        
-        <!-- Glowing dots for visited places -->
-        <g class="map-dots">
-          <circle cx="260" cy="370" r="4" fill="#c9a96e" opacity="0.8"><animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite"/></circle>
-          <circle cx="490" cy="100" r="4" fill="#c9a96e" opacity="0.8"><animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite" begin="0.5s"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite" begin="0.5s"/></circle>
-          <circle cx="475" cy="200" r="4" fill="#c9a96e" opacity="0.8"><animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite" begin="1s"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite" begin="1s"/></circle>
-          <circle cx="730" cy="130" r="4" fill="#c9a96e" opacity="0.8"><animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite" begin="1.5s"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite" begin="1.5s"/></circle>
-          <circle cx="760" cy="170" r="4" fill="#c9a96e" opacity="0.8"><animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite" begin="2s"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite" begin="2s"/></circle>
-          <circle cx="410" cy="55" r="4" fill="#c9a96e" opacity="0.8"><animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite" begin="0.3s"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite" begin="0.3s"/></circle>
-          <circle cx="490" cy="48" r="4" fill="#c9a96e" opacity="0.8"><animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite" begin="0.8s"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite" begin="0.8s"/></circle>
+        <g class="countries">
+          <!-- North America (USA) -->
+          <path id="USA" d="M120,60 L240,40 L280,70 L290,120 L240,160 L180,180 L140,160 L110,120 Z" data-name="美国" />
+          <!-- South America (ARG) -->
+          <path id="ARG" d="M220,230 L260,220 L280,260 L290,320 L270,380 L240,410 L220,380 L200,300 Z" data-name="巴塔哥尼亚 · 阿根廷" />
+          <!-- Iceland (ISL) -->
+          <path id="ISL" d="M390,55 L415,48 L425,55 L415,65 Z" data-name="冰岛" />
+          <!-- Norway/Scandinavia (NOR) -->
+          <path id="NOR" d="M470,45 L490,30 L505,40 L500,65 L480,60 Z" data-name="挪威" />
+          <!-- Europe (GRC) -->
+          <path id="GRC" d="M460,85 L510,75 L525,95 L510,125 L475,120 Z" data-name="希腊 · 圣托里尼" />
+          <!-- Morocco (MAR) -->
+          <path id="MAR" d="M435,160 L470,150 L485,185 L460,220 L425,200 Z" data-name="摩洛哥" />
+          <!-- China (CHN) -->
+          <path id="CHN" d="M590,95 L680,80 L730,110 L710,160 L620,155 L570,125 Z" data-name="中国" />
+          <!-- Japan (JPN) -->
+          <path id="JPN" d="M740,110 L755,100 L770,115 L750,135 Z" data-name="日本" />
+          <!-- Indonesia (IDN) -->
+          <path id="IDN" d="M680,210 L740,215 L760,230 L720,250 L660,235 Z" data-name="巴厘岛 · 印度尼西亚" />
+          <!-- Australia (AUS) -->
+          <path id="AUS" d="M750,300 L840,290 L860,330 L830,380 L760,370 Z" data-name="澳大利亚" />
+          
+          <!-- Rest of the continents (simplified generic background) -->
+          <path d="M440,220 L510,220 L530,280 L490,340 L450,300 Z" data-name="非洲" style="opacity: 0.15; fill: #1e1e35;" />
         </g>
+        
+        <!-- Glowing dots inside countries (will be handled dynamically in script.js) -->
+        <g id="mapGlowDots"></g>
       </svg>
       <!-- Tooltip -->
       <div id="mapTooltip" style="display:none;position:absolute;background:rgba(10,10,15,0.95);border:1px solid var(--accent);padding:0.8rem 1.2rem;border-radius:8px;font-size:0.85rem;color:var(--accent-light);pointer-events:none;z-index:10;white-space:nowrap;backdrop-filter:blur(10px);"></div>
@@ -109,7 +109,7 @@
     <button class="filter-btn" data-filter="americas">美洲</button>
   </div>
   <div class="dest-grid fade-in">
-    <div class="dest-card" data-region="asia" onclick="openDetail('kyoto')">
+    <div class="dest-card" data-region="asia" onclick="window.location.href='./kyoto.html'">
       <img src="images/dest_kyoto.png" alt="京都" loading="lazy">
       <div class="dest-card-overlay">
         <span class="dest-card-tag">亚洲 · 日本</span>
@@ -280,43 +280,47 @@
   <div class="section-header fade-in">
     <p class="section-label">Gallery</p>
     <h2 class="section-title">光影画廊</h2>
-    <p class="section-desc">用瀑布流的方式，沉浸在每一帧旅途中的光影之中</p>
+    <p class="section-desc">沉浸在每一帧旅途中的光影之中</p>
     <div class="divider"></div>
   </div>
   <div class="gallery-tabs fade-in">
-    <button class="gallery-tab active" data-tab="photos">摄影作品</button>
-    <button class="gallery-tab" data-tab="vlogs">旅行 Vlog</button>
+    <button class="gallery-tab active" data-tab="all">全部</button>
+    <button class="gallery-tab" data-tab="japan">日本</button>
+    <button class="gallery-tab" data-tab="europe">欧洲</button>
+    <button class="gallery-tab" data-tab="americas">美洲</button>
+    <button class="gallery-tab" data-tab="africa">非洲</button>
+    <button class="gallery-tab" data-tab="asia">亚洲</button>
   </div>
   <div class="masonry fade-in" id="galleryGrid">
-    <div class="masonry-item" onclick="openLightbox(0)">
+    <div class="masonry-item" data-category="europe" onclick="openLightbox(0)">
       <img src="images/hero_iceland.png" alt="冰岛极光" loading="lazy">
       <div class="img-label"><span>冰岛 · 杰古沙龙冰河湖</span></div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(1)">
+    <div class="masonry-item" data-category="japan" onclick="openLightbox(1)">
       <img src="images/dest_kyoto.png" alt="京都红叶" loading="lazy">
       <div class="img-label"><span>京都 · 清水寺秋色</span></div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(2)">
+    <div class="masonry-item" data-category="japan" onclick="openLightbox(2)">
       <img src="images/dest_tokyo.png" alt="东京夜景" loading="lazy">
       <div class="img-label"><span>东京 · 涩谷雨夜</span></div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(3)">
+    <div class="masonry-item" data-category="europe" onclick="openLightbox(3)">
       <img src="images/dest_santorini.png" alt="圣托里尼" loading="lazy">
       <div class="img-label"><span>圣托里尼 · 伊亚日落</span></div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(4)">
+    <div class="masonry-item" data-category="americas" onclick="openLightbox(4)">
       <img src="images/dest_patagonia.png" alt="巴塔哥尼亚" loading="lazy">
       <div class="img-label"><span>巴塔哥尼亚 · 百内三塔</span></div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(5)">
+    <div class="masonry-item" data-category="africa" onclick="openLightbox(5)">
       <img src="images/dest_morocco.png" alt="摩洛哥" loading="lazy">
       <div class="img-label"><span>马拉喀什 · 香料市场</span></div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(6)">
+    <div class="masonry-item" data-category="europe" onclick="openLightbox(6)">
       <img src="images/dest_norway.png" alt="挪威峡湾" loading="lazy">
       <div class="img-label"><span>挪威 · 盖朗厄尔峡湾</span></div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(7)">
+    <div class="masonry-item" data-category="asia" onclick="openLightbox(7)">
       <img src="images/dest_bali.png" alt="巴厘岛" loading="lazy">
       <div class="img-label"><span>巴厘岛 · 德格拉朗梯田</span></div>
     </div>
@@ -331,22 +335,11 @@
     <p class="section-desc">一个热爱用镜头记录世界的旅行者</p>
     <div class="divider"></div>
   </div>
-  <div class="about-grid fade-in">
-    <div class="about-image">
-      <img src="images/dest_bali.png" alt="关于我">
-    </div>
-    <div class="about-text">
-      <h3>你好，我是一名旅行摄影师</h3>
-      <p>从2018年背起第一台相机开始，我便踏上了用影像记录世界的旅程。从冰岛的极光到巴厘岛的梯田，从东京的霓虹到巴塔哥尼亚的冰川，每一次按下快门，都是对这个星球之美的一次致敬。</p>
-      <p>我相信旅行不仅仅是到达目的地，更是一种重新认识自己的方式。在路上的每一天，我都在学习用更谦卑的心去看待这个世界，用更细腻的目光去捕捉那些稍纵即逝的瞬间。</p>
-      <div class="about-philosophy">"世界是一本书，不旅行的人只读了其中一页。"<br>—— 圣奥古斯丁</div>
-      <div class="gear-list">
-        <div class="gear-item"><span class="icon">📷</span> Sony A7R V</div>
-        <div class="gear-item"><span class="icon">🔭</span> 24-70mm f/2.8 GM</div>
-        <div class="gear-item"><span class="icon">🎬</span> DJI Mavic 3 Pro</div>
-        <div class="gear-item"><span class="icon">🖥️</span> Lightroom Classic</div>
-      </div>
-    </div>
+  <div class="about-minimal fade-in">
+    <h3 class="about-min-title">用镜头，将瞬间定格为永恒。</h3>
+    <p class="about-min-p">我叫 Lulu，是一名热爱用影像记录世界的旅行者。从2018年背起第一台相机开始，我的生命便与风景紧密交织。</p>
+    <p class="about-min-p">无论是冰岛漫天的北极光、京都如火的枫叶，还是巴塔哥尼亚雄伟的冰川，我都试着用最谦卑的态度去捕捉世界赠予的诗意。旅行不仅是空间的丈量，更是心灵的探险，在路上的每一帧光影，都是岁月流淌中温热的呼吸。</p>
+    <div class="about-philosophy">"世界是一本书，不旅行的人只读了其中一页。" — 圣奥古斯丁</div>
   </div>
 </section>
 
